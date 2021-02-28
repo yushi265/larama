@@ -11,7 +11,7 @@
         </div>
     @endif
     <div class="card">
-        <div class="card-body">
+        <div class="card-body col-8 offset-2">
             <div class="font-weight-bold text-center border-bottom pb-3 pt-3" style="font-size: 24px">プロフィール編集</div>
 
             <form action="{{ route('edit-profile') }}" method="post" enctype="multipart/form-data" class="mt-5">
