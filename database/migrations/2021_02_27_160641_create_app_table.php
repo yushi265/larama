@@ -13,10 +13,56 @@ class CreateAppTable extends Migration
      */
     public function up()
     {
-        Schema::create('app', function (Blueprint $table) {
+        Schema::create('primary_categories', function (Blueprint $table) {
             $table->bigIncrements('id');
+            $table->string('name');
             $table->timestamps();
         });
+
+        Schema::create('secondary_categories', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('primary_category_id');
+            $table->string('name');
+            $table->timestamps();
+            // リレーション
+            $table
+                ->foreign('primary_category_id')
+                ->references('id')
+                ->on('primary_categories');
+        });
+
+        Schema::create('item_conditions', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->string('name');
+            $table->timestamps();
+        });
+
+        Schema::create('items', function (Blueprint $table) {
+            $table->bigIncrements('id');
+            $table->unsignedBigInteger('seller_id');
+            $table->unsignedBigInteger('buyer_id')->nullable();
+            $table->unsignedBigInteger('secondary_category_id');
+            $table->unsignedBigInteger('item_condition_id');
+            $table->timestamps();
+            // リレーション
+            $table
+                ->foreign('seller_id')
+                ->references('id')
+                ->on('users');
+            $table
+                ->foreign('buyer_id')
+                ->references('id')
+                ->on('users');
+            $table
+                ->foreign('secondary_category_id')
+                ->references('id')
+                ->on('secondary_categories');
+            $table
+                ->foreign('item_condition_id')
+                ->references('id')
+                ->on('item_conditions');
+        });
+
     }
 
     /**
@@ -26,6 +72,9 @@ class CreateAppTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('app');
+        Schema::dropIfExists('primary_categories');
+        Schema::dropIfExists('secondary_categories');
+        Schema::dropIfExists('item_conditions');
+        Schema::dropIfExists('items');
     }
 }
