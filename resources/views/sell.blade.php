@@ -18,7 +18,8 @@
 
             <div class="font-weight-bold text-center border-bottom pb-3 pt-3 mb-3" style="font-size: 24px">出品する</div>
 
-            <form action="" method="" enctype="multipart/form-data">
+            <form action="{{ route('sell') }}" method="post" enctype="multipart/form-data">
+                @csrf
                 <div>商品画像</div>
                     <span class="item-image-form image-picker">
                         <input type="file" name="item-image" class="d-none" accept="image/png,image/jpeg,image/gif" id="item-image" />
@@ -46,7 +47,7 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="exampleInputEmail1">説明</label>
-                    <input type="text" class="form-control @error('discription') is-invalid @enderror" id="exampleInputEmail1" name="discription" aria-describedby="emailHelp" placeholder="入力してください" value="">
+                    <input type="text" class="form-control @error('description') is-invalid @enderror" id="exampleInputEmail1" name="description" aria-describedby="emailHelp" placeholder="入力してください" value="">
                     @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -76,8 +77,8 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="exampleInputEmail1">金額</label>
-                    <input type="text" class="form-control @error('amount') is-invalid @enderror" id="exampleInputEmail1" name="amount" aria-describedby="emailHelp" placeholder="入力してください" value="">
-                    @error('amount')
+                    <input type="text" class="form-control @error('price') is-invalid @enderror" id="exampleInputEmail1" name="price" aria-describedby="emailHelp" placeholder="入力してください" value="">
+                    @error('price')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

@@ -41,8 +41,12 @@ class CreateAppTable extends Migration
             $table->bigIncrements('id');
             $table->unsignedBigInteger('seller_id');
             $table->unsignedBigInteger('buyer_id')->nullable();
+            $table->string('name');
+            $table->string('description');
             $table->unsignedBigInteger('secondary_category_id');
             $table->unsignedBigInteger('item_condition_id');
+            $table->unsignedInteger('price');
+            $table->string('item_image');
             $table->timestamps();
             // リレーション
             $table
