@@ -58,9 +58,11 @@
                             </a>
 
                             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="{{ route('sell') }}">商品を出品する</a>
                                 <a class="dropdown-item" href="{{ route('edit-profile') }}">プロフィール編集</a>
                             </div>
-                            <div class="dropdown-divider"></div>
+
+                            {{-- <div class="dropdown-divider"></div> --}}
                         </li>
                         <li class="nav-item ml-2">
                             <a type="button" class="btn btn-outline-primary" href="{{ route('logout') }}"

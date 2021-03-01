@@ -47,6 +47,7 @@ class CreateAppTable extends Migration
             $table->unsignedBigInteger('item_condition_id');
             $table->unsignedInteger('price');
             $table->string('item_image');
+            $table->string('state');
             $table->timestamps();
             // リレーション
             $table

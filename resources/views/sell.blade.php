@@ -13,8 +13,8 @@
         @endif
     </div>
 
-    <div class="card">
-        <div class="card-body col-8 offset-2">
+    <div class="card col-8 offset-2">
+        <div class="card-body ">
 
             <div class="font-weight-bold text-center border-bottom pb-3 pt-3 mb-3" style="font-size: 24px">出品する</div>
 
@@ -38,7 +38,7 @@
                     @enderror
                 <div class="form-group mt-3">
                     <label for="exampleInputEmail1">商品名</label>
-                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="exampleInputEmail1" name="name" aria-describedby="emailHelp" placeholder="入力してください" value="">
+                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="exampleInputEmail1" name="name" aria-describedby="emailHelp" placeholder="入力してください" value="{{ old('name') }}">
                     @error('name')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -47,8 +47,8 @@
                 </div>
                 <div class="form-group mt-3">
                     <label for="exampleInputEmail1">説明</label>
-                    <input type="text" class="form-control @error('description') is-invalid @enderror" id="exampleInputEmail1" name="description" aria-describedby="emailHelp" placeholder="入力してください" value="">
-                    @error('name')
+                    <input type="text" class="form-control @error('description') is-invalid @enderror" id="exampleInputEmail1" name="description" aria-describedby="emailHelp" placeholder="入力してください" value="{{ old('description') }}">
+                    @error('description')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -57,27 +57,41 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">カテゴリー</label>
                     <select class="form-control" id="exampleFormControlSelect1" name="category">
-                        <option>選択してください</option>
+                        {{-- <option>選択してください</option> --}}
                         @foreach ($categories as $category)
                             <optgroup label="{{ $category->name }}">{{ $category->name }}</optgroup>
                                 @foreach ($category->secondaryCategories as $secondary)
-                                    <option label="{{ $secondary->name}}" value="{{ $secondary->id }}">{{ $secondary->name }}</option>
+                                    <option label="{{ $secondary->name}}" value="{{ $secondary->id }}" @if (old('category') == $secondary->id) selected @endif>
+                                        {{ $secondary->name }}
+                                    </option>
                                 @endforeach
                         @endforeach
                     </select>
+                    @error('category')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">状態</label>
                     <select class="form-control" id="exampleFormControlSelect1" name="condition">
-                        <option>選択してください</option>
+                        {{-- <option>選択してください</option> --}}
                         @foreach ($conditions as $condition)
-                            <option label="{{ $condition->name }}" value="{{ $condition->id }}">{{ $condition->name }}</option>
+                            <option label="{{ $condition->name }}" value="{{ $condition->id }}" @if (old('condition') == $condition->id) selected @endif>
+                                {{ $condition->name }}
+                            </option>
                         @endforeach
                     </select>
+                    @error('condition')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
                 </div>
                 <div class="form-group mt-3">
                     <label for="exampleInputEmail1">金額</label>
-                    <input type="text" class="form-control @error('price') is-invalid @enderror" id="exampleInputEmail1" name="price" aria-describedby="emailHelp" placeholder="入力してください" value="">
+                    <input type="text" class="form-control @error('price') is-invalid @enderror" id="exampleInputEmail1" name="price" aria-describedby="emailHelp" placeholder="入力してください" value="{{ old('price') }}">
                     @error('price')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>

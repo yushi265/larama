@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\File;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Item;
+use App\Http\Requests\SellRequest;
 
 class SellController extends Controller
 {
@@ -23,7 +24,7 @@ class SellController extends Controller
         return view('sell')->with(['categories' => $categories, 'conditions' => $conditions]);
     }
 
-    public function sellItem(Request $request)
+    public function sellItem(SellRequest $request)
     {
         $user = Auth::user();
 
@@ -34,6 +35,7 @@ class SellController extends Controller
         $item->secondary_category_id = $request->category;
         $item->item_condition_id = $request->condition;
         $item->price = $request->price;
+        $item->state = Item::STATE_SELLING;
 
         if ($request->has('item-image')) {
             $file_name = Storage::putFile('public/item-images', $request->file('item-image'));
