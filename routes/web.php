@@ -31,4 +31,5 @@ Route::prefix('mypage')
     ->group(function() {
         Route::get('edit-profile', 'ProfileController@showEditProfileForm')->name('edit-profile');
         Route::post('edit-profile', 'ProfileController@editProfile')->name('edit-profile');
+        Route::get('sold-items', 'SoldItemsController@showSoldItems')->name('sold-items');
     });
